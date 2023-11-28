@@ -14,25 +14,27 @@
 
         <!-- Barta Create Post Card -->
         <form method="POST" enctype="multipart/form-data"
-            class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6 space-y-3">
+            class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6 space-y-3"
+            action="{{ route('posts.store') }}>
 
             <!-- Create Post Card Top -->
             <div>
-                <div class="flex items-start /space-x-3/">
-                    <!-- User Avatar -->
-                    <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/831997"
-                            alt="Ahmed Shamim" />
-                    </div>
-                    <!-- /User Avatar -->
+                <div class="flex
+            items-start /space-x-3/">
+            <!-- User Avatar -->
+            <div class="flex-shrink-0">
+                <img class="h-10 w-10 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/831997"
+                    alt="Ahmed Shamim" />
+            </div>
+            <!-- /User Avatar -->
 
-                    <!-- Content -->
-                    <div class="text-gray-700 font-normal w-full">
-                        <textarea
-                            class="block w-full p-2 pt-2 text-gray-900 rounded-lg border-none outline-none focus:ring-0 focus:ring-offset-0"
-                            name="barta" rows="2" placeholder="What's going on, Shamim?"></textarea>
-                    </div>
-                </div>
+            <!-- Content -->
+            <div class="text-gray-700 font-normal w-full">
+                <textarea
+                    class="block w-full p-2 pt-2 text-gray-900 rounded-lg border-none outline-none focus:ring-0 focus:ring-offset-0"
+                    name="barta" rows="2" placeholder="What's going on, Shamim?"></textarea>
+            </div>
+            </div>
             </div>
 
             <!-- Create Post Card Bottom -->
@@ -114,7 +116,7 @@
         <!-- /Barta Create Post Card -->
 
         <!-- Newsfeed -->
-        @foreach ($users as $user)
+        @foreach ($result as $data)
             <section id="newsfeed" class="space-y-6">
 
 
@@ -123,62 +125,59 @@
                     <!-- Barta Card Top -->
                     <header>
 
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <!-- User Avatar -->
-                                    <div class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full object-cover"
-                                            src="https://avatars.githubusercontent.com/u/61485238" alt="Al Nahian" />
-                                    </div>
-                                    <!-- /User Avatar -->
-
-                                    <!-- User Info -->
-                                    <div class="text-gray-900 flex flex-col min-w-0 flex-1">
-                                        <a href="https://github.com/alnahian2003"
-                                            class="hover:underline font-semibold line-clamp-1">
-                                            {{ $user->name }}
-                                        </a>
-
-                                        <a href="https://twitter.com/alnahian2003"
-                                            class="hover:underline text-sm text-gray-500 line-clamp-1">
-                                            {{ $user->email }}
-                                        </a>
-                                    </div>
-                                    <!-- /User Info -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <!-- User Avatar -->
+                                <div class="flex-shrink-0">
+                                    <img class="h-10 w-10 rounded-full object-cover"
+                                        src="https://avatars.githubusercontent.com/u/61485238" alt="Al Nahian" />
                                 </div>
+                                <!-- /User Avatar -->
 
-                                <!-- Card Action Dropdown -->
-                                <div class="flex flex-shrink-0 self-center" x-data="{ open: false }">
-                                    <div class="relative inline-block text-left">
-                                        <div>
-                                            <button @click="open = !open" type="button"
-                                                class="-m-2 flex items-center rounded-full p-2 text-gray-400 hover:text-gray-600"
-                                                id="menu-0-button">
-                                                <span class="sr-only">Open options</span>
-                                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                                                    aria-hidden="true">
-                                                    <path
-                                                        d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <!-- Dropdown menu -->
-                                        <div x-show="open" @click.away="open = false"
-                                            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
-                                            tabindex="-1">
-                                            <a href="#"
-                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                role="menuitem" tabindex="-1" id="user-menu-item-0">Edit</a>
-                                            <a href="#"
-                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                role="menuitem" tabindex="-1" id="user-menu-item-1">Delete</a>
-                                        </div>
-                                    </div>
+                                <!-- User Info -->
+                                <div class="text-gray-900 flex flex-col min-w-0 flex-1">
+                                    <a href="https://github.com/alnahian2003"
+                                        class="hover:underline font-semibold line-clamp-1">
+                                        {{ $data->name }}
+                                    </a>
+
+                                    <a href="https://twitter.com/alnahian2003"
+                                        class="hover:underline text-sm text-gray-500 line-clamp-1">
+                                        {{ $data->email }}
+                                    </a>
                                 </div>
-                                <!-- /Card Action Dropdown -->
+                                <!-- /User Info -->
                             </div>
+
+                            <!-- Card Action Dropdown -->
+                            <div class="flex flex-shrink-0 self-center" x-data="{ open: false }">
+                                <div class="relative inline-block text-left">
+                                    <div>
+                                        <button @click="open = !open" type="button"
+                                            class="-m-2 flex items-center rounded-full p-2 text-gray-400 hover:text-gray-600"
+                                            id="menu-0-button">
+                                            <span class="sr-only">Open options</span>
+                                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path
+                                                    d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <!-- Dropdown menu -->
+                                    <div x-show="open" @click.away="open = false"
+                                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
+                                        tabindex="-1">
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            role="menuitem" tabindex="-1" id="user-menu-item-0">Edit</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            role="menuitem" tabindex="-1" id="user-menu-item-1">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Card Action Dropdown -->
+                        </div>
 
                     </header>
 
@@ -187,7 +186,7 @@
                     <div class="py-4 text-gray-700 font-normal space-y-2">
                         <img src="https://images.pexels.com/photos/6261178/pexels-photo-6261178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             class="min-h-auto w-full rounded-lg object-cover max-h-64 md:max-h-72" alt="" />
-                        <p>{{ $user->post_content }}</p>
+                        <p>{{ $data->post_content }}</p>
                     </div>
 
                     <!-- Date Created & View Stat -->
@@ -202,6 +201,56 @@
                         <!-- Card Bottom Action Buttons -->
                         <div class="flex items-center justify-between">
                             <div class="flex gap-8 text-gray-600">
+                                <!-- Comment section -->
+
+                                <div class="w-full bg-white rounded-lg border p-2 my-4 mx-6">
+                                    <h3 class="font-bold">Discussion</h3>
+                                    <form>
+                                        <div class="flex flex-col">
+                                            <div class="border rounded-md p-3 ml-3 my-3">
+                                                <div class="flex gap-3 items-center">
+                                                    <img src="https://avatars.githubusercontent.com/u/22263436?v=4"
+                                                        class="object-cover w-8 h-8 rounded-full
+                                         border-2 border-emerald-400  shadow-emerald-400
+                                             ">
+                                                    <h3 class="font-bold">
+                                                        {{ $data->name }}
+                                                    </h3>
+                                                </div>
+                                                <p class="text-gray-600 mt-2">
+                                                    {{ $data->comment_content }}
+                                                </p>
+                                            </div>
+                                            <div class="border rounded-md p-3 ml-3 my-3">
+                                                <div class="flex gap-3 items-center">
+                                                    <img src="https://avatars.githubusercontent.com/u/22263436?v=4"
+                                                        class="object-cover w-8 h-8 rounded-full
+                                                     border-2 border-emerald-400  shadow-emerald-400
+                                                              ">
+                                                    <h3 class="font-bold">
+                                                        User name
+                                                    </h3>
+                                                </div>
+                                                <p class="text-gray-600 mt-2">
+                                                    this is sample commnent
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="w-full px-3 my-2">
+                                            <textarea
+                                                class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                                                name="body" placeholder='Type Your Comment' required></textarea>
+                                        </div>
+
+                                        <div class="w-full flex justify-end px-3">
+                                            <input type='submit'
+                                                class="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500"
+                                                value='Post Comment'>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Comment section -->
                                 <!-- Heart Button -->
                                 <!--                        <button-->
                                 <!--                          type="button"-->
@@ -227,7 +276,9 @@
                                 <!-- Comment Button -->
                                 <button type="button"
                                     class="-m-2 flex gap-2 text-xs items-center rounded-full p-2 text-gray-600 hover:text-gray-800">
-                                    <span class="sr-only">Comment</span>
+                                    <span class="sr-only">
+                                        Comments
+                                    </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -236,7 +287,9 @@
 
                                     <p>8</p>
                                 </button>
+
                                 <!-- /Comment Button -->
+
                             </div>
 
                             <!--                      <div>-->

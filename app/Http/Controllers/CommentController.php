@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CommentStoreRequest;
 
 class CommentController extends Controller
 {
@@ -11,7 +13,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        // $comments = DB::table('comments')->get();
+
     }
 
     /**
@@ -19,15 +22,27 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            DB::table("comments")->insert([
+                'user_id' => $validated["user_id"],
+                'post_id' => $validated["post_id"],
+                'comment_content' => $validated['comment_content'],
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+            return redirect()->back()->with('success', 'The comment is created successfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

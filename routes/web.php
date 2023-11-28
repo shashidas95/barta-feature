@@ -1,39 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::post('/posts', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::patch('/posts/{post}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/posts', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::resource('posts', PostController::class);
 });
 
-require __DIR__.'/auth.php';
-Route::resource('posts', PostController::class);
-
-//   GET|HEAD        posts                         posts.index › PostController@index
-//   POST            posts ..........              posts.store › PostController@store
-//   GET|HEAD        posts/create .                posts.create › PostController@create
-//   GET|HEAD        posts/{post} .....            posts.show › PostController@show
-//   PUT|PATCH       posts/{post} .                posts.update › PostController@update
-//   DELETE          posts/{post} ......           posts.destroy › PostController@destroy
-//   GET|HEAD        posts/{post}/edit             posts.edit › PostController@edit
+require __DIR__ . '/auth.php';
