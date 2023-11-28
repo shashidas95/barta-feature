@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\PostHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostStoreRequest;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostUpdateRequest;
 
@@ -59,7 +61,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
         $post = DB::table('posts')->where('id', $request->id)->first();
         // $user =null;
@@ -68,6 +70,8 @@ class PostController extends Controller
         }
         return view("post.single-post", compact(['user', 'post']));
     }
+
+
     /**
      * Show the form for editing the specified resource.
      */

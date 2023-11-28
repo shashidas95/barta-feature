@@ -17,6 +17,8 @@ class HomeController extends Controller
             ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
             // ->where('users.id', '=', $userId)
             ->get();
+
+            
         return view('home', compact('result'));
     }
 }

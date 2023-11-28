@@ -21,10 +21,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::post('/posts', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::patch('/posts/{post}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/posts', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts', [PostController::class, 'destroy'])->name('posts.destroy');
     // Route::resource('posts', PostController::class);
 });
 

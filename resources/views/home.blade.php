@@ -14,26 +14,26 @@
         <!-- Barta Create Post Card -->
         <form method="POST" enctype="multipart/form-data"
             class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6 space-y-3"
-            action="#">
+            action="{{ route('posts.store') }}">
 
             <!-- Create Post Card Top -->
             <div>
                 <div class="flex
             items-start /space-x-3/">
-            <!-- User Avatar -->
-            <div class="flex-shrink-0">
-                <img class="h-10 w-10 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/831997"
-                    alt="Ahmed Shamim" />
-            </div>
-            <!-- /User Avatar -->
+                    <!-- User Avatar -->
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/831997"
+                            alt="Ahmed Shamim" />
+                    </div>
+                    <!-- /User Avatar -->
 
-            <!-- Content -->
-            <div class="text-gray-700 font-normal w-full">
-                <textarea
-                    class="block w-full p-2 pt-2 text-gray-900 rounded-lg border-none outline-none focus:ring-0 focus:ring-offset-0"
-                    name="barta" rows="2" placeholder="What's going on, Shamim?"></textarea>
-            </div>
-            </div>
+                    <!-- Content -->
+                    <div class="text-gray-700 font-normal w-full">
+                        <textarea
+                            class="block w-full p-2 pt-2 text-gray-900 rounded-lg border-none outline-none focus:ring-0 focus:ring-offset-0"
+                            name="barta" rows="2" placeholder="What's going on, Shamim?"></textarea>
+                    </div>
+                </div>
             </div>
 
             <!-- Create Post Card Bottom -->
@@ -178,10 +178,10 @@
                             @endif
                         </div>
                     </header>
-
+                    {{-- {{ dd($data) }} --}}
                     <!-- Content -->
                     <div class="py-4 text-gray-700 font-normal">
-                        <a href="{{ route('posts.show', ['id' => $data->id]) }}">
+                        <a href="{{ route('posts.show', ['post' => $data->id]) }}">
                             <img class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl"
                                 {{-- src="{{ asset('./images/' . $data->photo_path ?? 'https://via.placeholder.com/150') }}" --}} src="https://via.placeholder.com/150" alt="blog">
                         </a>
