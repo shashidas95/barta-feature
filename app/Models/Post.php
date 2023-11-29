@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
     use HasFactory;
-    // protected $fillable = [
-    //     'content',
-    // ];
-    // public function comments(){
-    //     return $this->hasMany(Comment::class);
-    // }
-    // public function user(){
-    //     return $this->belongsTo(User::class);
-    // }
+    protected $fillable = [
+        'content',
+    ];
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

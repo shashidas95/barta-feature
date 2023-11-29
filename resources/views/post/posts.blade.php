@@ -15,12 +15,12 @@
         <!-- Barta Create Post Card -->
         <form method="POST" enctype="multipart/form-data"
             class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6 space-y-3"
-            action="{{ route('posts.store') }}>
+            action="{{ route('posts.store') }}">
 
             <!-- Create Post Card Top -->
             <div>
                 <div class="flex
-            items-start /space-x-3/">
+            items-start space-x-3" >
             <!-- User Avatar -->
             <div class="flex-shrink-0">
                 <img class="h-10 w-10 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/831997"

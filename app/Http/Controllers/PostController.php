@@ -18,15 +18,25 @@ class PostController extends Controller
      */
     public function index()
     {
+
+        // $result = DB::table('users as u')
+        // ->join('posts as p', 'u.id', '=', 'p.user_id')
+        // ->leftJoin('comments as c', 'p.id', '=', 'c.post_id')
+        // ->select('u.*', 'p.*', 'c.*')
+        // ->get();
+
         $result = DB::table('users')
             ->select('*')
             ->addSelect('posts.*')
             ->addSelect('comments.*')
             ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->leftJoin('comments', 'users.id', '=', 'comments.user_id')
             // ->where('users.id', '=', $userId)
             ->get();
+            // dd($result);
         return view('post.posts', compact('result'));
+
+
     }
     /**
      * Show the form for creating a new resource.
@@ -61,7 +71,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $post)
     {
         $post = DB::table('posts')->where('id', $request->id)->first();
         // $user =null;
@@ -75,11 +85,11 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($post)
     {
         $user = Auth::user();
         //retrive post accoding to id
-        $post = DB::table('posts')->find($id);
+        $post = DB::table('posts')->find($post);
         // Check if the post exists
         if (!$post) {
             return redirect()->back()->with('error', 'Post not found');
@@ -89,7 +99,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostUpdateRequest $request, string $id)
+    public function update(PostUpdateRequest $request, string $post)
     {
         $validated = $request->validated();
         $user = Auth::user();
@@ -122,10 +132,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $post)
     {
         // Retrieve the post by ID
-        $post = DB::table('posts')->where('id', $id)->first();
+        $post = DB::table('posts')->where('id', $post)->first();
         // Check if the post exists
         if ($post) {
             // Delete the associated image
@@ -133,7 +143,7 @@ class PostController extends Controller
                 Storage::disk('public')->delete('images/' . basename($post->photo_path));
             }
             // Delete the post from the database
-            DB::table('posts')->where('id', $id)->delete();
+            DB::table('posts')->where('id', $post)->delete();
             return redirect()->route('post.show')->with('success', 'Post deleted successfully');
         } else {
             return redirect()->route('post.show')->with('error', 'Post not found');
